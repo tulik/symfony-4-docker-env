@@ -25,7 +25,7 @@ $ docker-compose exec php bin/console doctrine:schema:update --force
 or
 
 ```
-$ docker-compose req profiler
+$ docker-compose exec php composer req profiler
 ```
 
 **That's all!**

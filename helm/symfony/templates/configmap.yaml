@@ -1,0 +1,13 @@
+sfVersion: 4.0.3
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  env: {{ .Values.env | quote }}
+  debug: {{ .Values.debug | quote }}
+  cors-allow-origin: {{ .Values.corsAllowOrigin | quote }}

@@ -1,0 +1,36 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+env: dev
+debug: '0'
+secret: ChangeMe
+corsAllowOrigin: http://example.com
+
+php:
+  repository: gcr.io/personal-dev-enviroment/php
+  tag: latest
+  pullPolicy: Always
+  replicaCount: 1
+
+nginx:
+  repository: gcr.io/personal-dev-enviroment/nginx
+  tag: latest
+  pullPolicy: Always
+  replicaCount: 1
+
+
+postgresql:
+  enabled: true
+  postgresUser: symfony
+  postgresPassword: symfony
+  postgresDatabase: symfony
+  persistence:
+    enabled: false
+
+resources:
+   limits:
+    cpu: 100m
+    memory: 128Mi
+   requests:
+    cpu: 100m
+    memory: 128Mi

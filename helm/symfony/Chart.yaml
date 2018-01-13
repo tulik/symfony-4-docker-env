@@ -1,0 +1,4 @@
+description: A Helm chart for Symfony 4 Minimal Runtime Enviroment
+name: Symfony 4
+version: 1.0
+icon: https://sensiolabs.com/images/illustration/inner_pages/products/sf.jpg

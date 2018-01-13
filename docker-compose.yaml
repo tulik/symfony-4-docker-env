@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+    php:
+        build:
+            context: ./symfony
+        container_name: php
+        depends_on:
+            - db
+        env_file:
+            - ./symfony/.env
+        # Comment out these volumes in production
+        volumes:
+            - ./symfony:/srv/symfony
+            # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+            - /srv/symfony/var/
+            - /srv/symfony/var/cache/
+            - /srv/symfony/var/logs/
+            - /srv/symfony/var/sessions/
+
+    symfony:
+        build:
+            context: ./symfony
+            dockerfile: ./Dockerfile.nginx
+        container_name: symfony
+        depends_on:
+            - php
+        ports:
+            - "8080:80"
+        volumes:
+            - ./symfony/public:/srv/symfony/public:ro
+
+    db:
+        # In production, you may want to use a managed database service
+        image: postgres:9.6-alpine
+        container_name: db
+        environment:
+            - POSTGRES_DB=symfony
+            - POSTGRES_USER=symfony
+            # You should definitely change the password in production
+            - POSTGRES_PASSWORD=!ChangeMe!
+        volumes:
+            - db-data:/var/lib/postgresql/data:rw
+            # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+            # - ./docker/db/data:/var/lib/postgresql/data:rw
+        ports:
+            - "5432:5432"
+
+    adminer:
+      image: adminer
+      container_name: adminer
+      depends_on:
+          - db
+      restart: always
+      ports:
+        - 2000:8080
+
+
+    h2-proxy:
+        # Don't use this proxy in prod
+        build:
+            context: ./h2-proxy
+            dockerfile: ./Dockerfile
+        container_name: h2-proxy
+        depends_on:
+            - symfony
+        ports:
+            - "80:80"
+            - "443:443"
+
+volumes:
+    db-data: {}

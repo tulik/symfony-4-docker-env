@@ -28,17 +28,17 @@ services:
         ports:
             - "8080:80"
         volumes:
-            - ./symfony/public:/srv/symfony/public:ro
+            - ./symfony/public:/srv/symfony/public:rw
 
     db:
         # In production, you may want to use a managed database service
-        image: postgres:9.6-alpine
+        image: postgres:10.2-alpine
         container_name: db
         environment:
             - POSTGRES_DB=symfony
             - POSTGRES_USER=symfony
             # You should definitely change the password in production
-            - POSTGRES_PASSWORD=!ChangeMe!
+            - POSTGRES_PASSWORD=symfony
         volumes:
             - db-data:/var/lib/postgresql/data:rw
             # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!

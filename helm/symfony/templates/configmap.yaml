@@ -1,4 +1,4 @@
-sfVersion: 4.0.3
+symfony: 4
 kind: ConfigMap
 metadata:
   name: {{ template "fullname" . }}

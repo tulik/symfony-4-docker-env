@@ -1,4 +1,4 @@
-sfVersion: 4.0.3
+symfony: 4
 kind: Deployment
 metadata:
   name: {{ template "name" . }}-nginx

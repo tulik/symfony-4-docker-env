@@ -1,4 +1,4 @@
-sfVersion: 4.0.3
+symfony: 4
 kind: Service
 metadata:
   name: php

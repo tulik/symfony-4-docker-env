@@ -1,7 +1,7 @@
 # Symfony 4 Docker
 ## Minimal Runtime Environment [![Build Status](https://travis-ci.org/tulik/symfony-4-runtime-env.svg?branch=master)](https://travis-ci.org/tulik/symfony-4-runtime-env)
-<br />
-<center>![alt](https://raw.githubusercontent.com/tulik/tulik.github.io/source/img/2018-02-10/sf4_docker_minimal_runtime_env.png)</center>
+
+![alt](https://raw.githubusercontent.com/tulik/tulik.github.io/source/img/2018-02-10/sf4_docker_minimal_runtime_env.png)</center>
 
 ### Minimal Symfony 4 Runtime Environment created with Docker.
 
@@ -13,8 +13,8 @@
 * [Adminer](https://www.adminer.org/)
 
 # Run in 5 min - see video
----
-<center>[![Setup Symfony 4 with Docker in 5 minutes](http://img.youtube.com/vi/vu7ygQ0b8NI/0.jpg)](http://www.youtube.com/watch?v=vu7ygQ0b8NI)</center>
+
+[![Setup Symfony 4 with Docker in 5 minutes](http://img.youtube.com/vi/vu7ygQ0b8NI/0.jpg)](http://www.youtube.com/watch?v=vu7ygQ0b8NI)</center>
 
 ## How to start
 

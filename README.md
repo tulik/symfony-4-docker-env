@@ -19,9 +19,7 @@
 # Run in 5 min - see video
 
 <p align="center">
-	<a href="http://www.youtube.com/watch?feature=player_embedded&v=vu7ygQ0b8NI
-	" target="_blank"><img src="http://img.youtube.com/vi/vu7ygQ0b8NI/0.jpg" 
-	alt="Setup Symfony 4 with Docker in 5 minutes" width="480" height="320" border="0" /></a>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vu7ygQ0b8NI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </p>
 
 ## How to start

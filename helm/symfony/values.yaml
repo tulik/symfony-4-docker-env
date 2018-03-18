@@ -6,7 +6,7 @@ debug: '0'
 secret: ChangeMe
 corsAllowOrigin: http://example.com
 
-php:
+php-fpm:
   repository: gcr.io/personal-dev-enviroment/php
   tag: latest
   pullPolicy: Always

@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-    php:
+    php-fpm:
         build:
             context: ./symfony
-        container_name: php
+        container_name: php-fpm
         depends_on:
-            - db
+            - postgres
         env_file:
             - ./symfony/.env
         # Comment out these volumes in production
@@ -17,27 +17,30 @@ services:
             - /srv/symfony/var/cache/
             - /srv/symfony/var/logs/
             - /srv/symfony/var/sessions/
+        environment:
+            # If you develop on Windows change this to remote_host=docker.for.win.localhost
+            # If you develop on Linux change this to remote_host=172.17.0.1
+            XDEBUG_CONFIG: "remote_host=docker.for.mac.localhost idekey=IDE_XDEBUG"
 
     symfony:
         build:
             context: ./symfony
-            dockerfile: ./Dockerfile.nginx
+            dockerfile: Dockerfile.nginx
         container_name: symfony
         depends_on:
-            - php
+            - php-fpm
         ports:
             - "8080:80"
         volumes:
             - ./symfony/public:/srv/symfony/public:rw
 
-    db:
+    postgres:
         # In production, you may want to use a managed database service
         image: postgres:10.2-alpine
-        container_name: db
+        container_name: postgres
         environment:
             - POSTGRES_DB=symfony
             - POSTGRES_USER=symfony
-            # You should definitely change the password in production
             - POSTGRES_PASSWORD=symfony
         volumes:
             - db-data:/var/lib/postgresql/data:rw
@@ -50,7 +53,7 @@ services:
       image: adminer
       container_name: adminer
       depends_on:
-          - db
+          - postgres
       restart: always
       ports:
         - 2000:8080

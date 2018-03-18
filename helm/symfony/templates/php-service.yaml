@@ -1,9 +1,9 @@
 symfony: 4
 kind: Service
 metadata:
-  name: php
+  name: php-fpm
   labels:
-    app: {{ template "name" . }}-php
+    app: {{ template "name" . }}-php-fpm
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -12,5 +12,5 @@ spec:
   ports:
     - port: 9000
   selector:
-    app: {{ template "name" . }}-php
+    app: {{ template "name" . }}-php-fpm
     release: {{ .Release.Name }}

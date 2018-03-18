@@ -1,9 +1,9 @@
 symfony: 4
 kind: Deployment
 metadata:
-  name: {{ template "name" . }}-php
+  name: {{ template "name" . }}-php-fpm
   labels:
-    app: {{ template "name" . }}-php
+    app: {{ template "name" . }}-php-fpm
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "name" . }}-php
+        app: {{ template "name" . }}-php-fpm
         release: {{ .Release.Name }}
     spec:
       containers:

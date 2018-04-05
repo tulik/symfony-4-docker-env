@@ -1,5 +1,5 @@
 # Symfony 4 Docker
-## Minimal Runtime Environment [![Build Status](https://travis-ci.org/tulik/symfony-4-runtime-env.svg?branch=master)](https://travis-ci.org/tulik/symfony-4-runtime-env)  [![symfony 4 docker](https://img.shields.io/badge/dev-symfony%204-F7CA18.svg?style=flat)](https://github.com/tulik/symfony-4-docker-runtime-env)
+## Minimal Runtime Environment [![Build Status](https://travis-ci.org/tulik/symfony-4-docker-runtime-env.svg?branch=master)](https://travis-ci.org/tulik/symfony-4-runtime-env)  [![symfony 4 docker](https://img.shields.io/badge/dev-symfony%204-F7CA18.svg?style=flat)](https://github.com/tulik/symfony-4-docker-runtime-env)
 
 
 
@@ -27,20 +27,24 @@
 ## How to start
 
 ```
-$ git clone https://github.com/tulik/symfony-4-runtime-env.git
-$ cd symfony-4-runtime-env
+$ git clone https://github.com/tulik/symfony-4-docker-runtime-env.git
+$ cd symfony-4-docker-runtime-env
 $ docker-compose up
 ```
 
 ## Executing command inside of Docker container
 
 ```
-$ docker-compose exec php bin/console doctrine:schema:update --force
+$ docker-compose exec php-fpm bin/console doctrine:schema:update --force
 ```
 
 or
 
 ```
-$ docker-compose exec php composer req profiler
+$ docker-compose exec php-fpm composer req profiler
+
 ```
 
+## &nbsp;
+
+**Copyright Note:** Substantial portions of the solution was introduced by [Kévin Dunglas](https://github.com/dunglas).

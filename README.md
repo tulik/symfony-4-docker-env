@@ -29,7 +29,7 @@
 ```
 $ git clone https://github.com/tulik/symfony-4-docker-runtime-env.git
 $ cd symfony-4-docker-runtime-env
-$ docker-compose up
+$ docker-compose up -d
 ```
 
 ## Executing command inside of Docker container

@@ -35,13 +35,13 @@ $ docker-compose up
 ## Executing command inside of Docker container
 
 ```
-$ docker-compose exec php-fpm bin/console doctrine:schema:update --force
+$ docker-compose exec php bin/console doctrine:schema:update --force
 ```
 
 or
 
 ```
-$ docker-compose exec php-fpm composer req profiler
+$ docker-compose exec php composer req profiler
 
 ```
 

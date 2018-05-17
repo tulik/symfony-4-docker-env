@@ -20,6 +20,6 @@ script:
   - docker-compose up -d
   - linux-amd64/helm lint symfony/helm/symfony/
   - sleep 30
-  - docker-compose exec -T php-fpm composer req sensiolabs/security-checker
-  - docker-compose exec -T php-fpm bin/console security:check
+  - docker-compose exec -T php composer req sensiolabs/security-checker
+  - docker-compose exec -T php bin/console security:check
   - curl -k https://localhost

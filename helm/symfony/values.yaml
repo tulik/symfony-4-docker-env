@@ -1,36 +1,62 @@
+# Default values for symfony.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-env: dev
-debug: '0'
+env: prod
+debug: '1'
 secret: ChangeMe
 corsAllowOrigin: http://example.com
 
-php-fpm:
-  repository: gcr.io/personal-dev-enviroment/php
+php:
+  repository: gcr.io/personal-dev-environment/php
   tag: latest
   pullPolicy: Always
   replicaCount: 1
 
 nginx:
-  repository: gcr.io/personal-dev-enviroment/nginx
+  repository: gcr.io/personal-dev-environment/nginx
   tag: latest
   pullPolicy: Always
   replicaCount: 1
 
+varnish:
+  enabled: true
+  #url: https://example.com
+  repository: gcr.io/personal-dev-environment/varnish
+  tag: latest
+  pullPolicy: Always
+  replicaCount: 1
+
+ingress:
+  annotations:
+    # kubernetes.io/ingress.class: gce
+    # kubernetes.io/tls-acme: "true"
+  tls:
+    # Secrets must be manually created in the namespace.
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
 
 postgresql:
   enabled: true
+  # If bringing your own PostgreSQL, the full uri to use
+  #url: pgsql://symfony-platform:!ChangeMe!@example.com/symfony?serverVersion=10.1
   postgresUser: symfony
-  postgresPassword: symfony
+  postgresPassword: ChangeMe
   postgresDatabase: symfony
+  # Persistent Volume Storage configuration.
+  # ref: https://kubernetes.io/docs/user-guide/persistent-volumes
   persistence:
     enabled: false
 
-resources:
-   limits:
-    cpu: 100m
-    memory: 128Mi
-   requests:
-    cpu: 100m
-    memory: 128Mi
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi

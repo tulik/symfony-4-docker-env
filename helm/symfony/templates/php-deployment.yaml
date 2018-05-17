@@ -1,9 +1,9 @@
-symfony: 4
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "name" . }}-php-fpm
+  name: {{ template "name" . }}-php
   labels:
-    app: {{ template "name" . }}-php-fpm
+    app: {{ template "name" . }}-php
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "name" . }}-php-fpm
+        app: {{ template "name" . }}-php
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -37,6 +37,11 @@ spec:
                 configMapKeyRef:
                   name: {{ template "fullname" . }}
                   key: cors-allow-origin
+            - name: VARNISH_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: varnish-url
             - name: APP_SECRET
               valueFrom:
                 secretKeyRef:

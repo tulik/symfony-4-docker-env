@@ -7,8 +7,23 @@ addons:
   apt:
     packages:
       - docker-ce
+cache:
+  directories:
+    - $HOME/gcloud/
+env:
+  - PATH=$PATH:$HOME/gcloud/google-cloud-sdk/bin GOOGLE_APPLICATION_CREDENTIALS=$TRAVIS_BUILD_DIR/client_secrets.json #Other environment variables on same line
 
 before_install:
+  - if [ ! -d "$HOME/google-cloud-sdk" ]; then
+        export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)";
+        echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list;
+        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - ;
+        sudo apt-get update && sudo apt-get install google-cloud-sdk;
+    fi
+  - openssl aes-256-cbc -K $encrypted_6797df738197_key -iv $encrypted_6797df738197_iv -in client_secrets.json.enc -out $GOOGLE_APPLICATION_CREDENTIALS -d
+  - if [ -a $GOOGLE_APPLICATION_CREDENTIALS ]; then
+        gcloud -q auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS;
+    fi
   - sudo service postgresql stop
   - wget https://kubernetes-helm.storage.googleapis.com/helm-v2.6.1-linux-amd64.tar.gz
   - tar xzf helm-v2.6.1-linux-amd64.tar.gz
@@ -18,8 +33,17 @@ before_install:
 script:
   - if [[ $(jq  '.extra.symfony.id' symfony/composer.json) != '""' ]]; then echo 'symfony.id must be empty' 1>&2 && false; fi
   - docker-compose up -d
-  - linux-amd64/helm lint symfony/helm/symfony/
+  - linux-amd64/helm lint helm/symfony/
   - sleep 30
   - docker-compose exec -T php composer req sensiolabs/security-checker
   - docker-compose exec -T php bin/console security:check
   - curl -k https://localhost
+  - docker build -t gcr.io/$GCLOUD_PROJECT/php -t gcr.io/$GCLOUD_PROJECT/php:latest symfony
+  - docker build -t gcr.io/$GCLOUD_PROJECT/nginx -t gcr.io/$GCLOUD_PROJECT/nginx:latest -f symfony/Dockerfile.nginx symfony
+  - docker build -t gcr.io/$GCLOUD_PROJECT/varnish -t gcr.io/$GCLOUD_PROJECT/varnish:latest -f symfony/Dockerfile.varnish symfony
+  - gcloud container clusters get-credentials cluster-1 --zone europe-west1-c --project $GCLOUD_PROJECT
+  - gcloud docker -- push gcr.io/$GCLOUD_PROJECT/php
+  - gcloud docker -- push gcr.io/$GCLOUD_PROJECT/nginx
+  - gcloud docker -- push gcr.io/$GCLOUD_PROJECT/varnish
+  - linux-amd64/helm del --purge symfony-4-docker-runtime-env
+  - linux-amd64/helm install helm/symfony --namespace symfony --name symfony-4-docker-runtime-env

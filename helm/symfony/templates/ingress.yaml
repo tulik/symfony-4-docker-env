@@ -12,9 +12,14 @@ metadata:
       {{ $key }}: {{ $value | quote }}
     {{- end }}
 spec:
-  backend:
-    serviceName: {{ if .Values.varnish.enabled }}varnish{{ else }}symfony{{ end }}
-    servicePort: 80
+  rules:
+  - host: symfony-4-docker-runtime-env.tulik.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ if .Values.varnish.enabled }}varnish{{ else }}symfony{{ end }}
+          servicePort: 80
   {{- if .Values.ingress.tls }}
   tls:
 {{ toYaml .Values.ingress.tls | indent 4 }}

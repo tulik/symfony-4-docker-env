@@ -1,51 +1,78 @@
 # Symfony 4 Docker
 ## Minimal Runtime Environment [![Build Status](https://travis-ci.org/tulik/symfony-4-docker-runtime-env.svg?branch=master)](https://travis-ci.org/tulik/symfony-4-docker-runtime-env)  [![symfony 4 docker](https://img.shields.io/badge/dev-symfony%204-F7CA18.svg?style=flat)](https://github.com/tulik/symfony-4-docker-runtime-env)
 
-
-
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tulik/tulik.github.io/source/img/2018-02-10/sf4_docker_minimal_runtime_env.png">
+  <img src="https://raw.githubusercontent.com/tulik/symfony-4-docker-runtime-env/master/documentation/images/logo.png">
 </p>
 
 
-### Minimal Symfony 4 Runtime Environment created with Docker.
-Deployed with Travis and Kubernetes running on: [https://symfony-4-docker-runtime-env.tulik.info/](https://symfony-4-docker-runtime-env.tulik.info/)
+# Table of content
+- [See it working! [Deployed with Travis and Kubernetes](https://symfony-4-docker-runtime-env.tulik.info/)](#see-it-working-deployed-with-travis-and-kuberneteshttpssymfony-4-docker-runtime-envtulikinfo)
+- [Table of content](#table-of-content)
+- [Environment architecture](#environment-architecture)
+- [Quick start](#quick-start)
+- [Video tuturial](#video-tuturial)
+- [Directory structure](#directory-structure)
 
-# Enviroment details
-* [PHP-FPM](https://php-fpm.org/)
-* [Postgres](https://www.postgresql.org/)
-* [Nginx](https://nginx.org/en/)
-* [Adminer](https://www.adminer.org/)
+## See it working! [Deployed with Travis and Kubernetes](https://symfony-4-docker-runtime-env.tulik.info/)
+Further documentation about deployment will be provied.
 
-# Run in 5 min - see video
+# Environment architecture
 
 <p align="center">
-	<a href="http://www.youtube.com/watch?feature=player_embedded&v=NIEKB5iRcOs
-	" target="_blank"><img src="http://img.youtube.com/vi/NIEKB5iRcOs/0.jpg" 
-	alt="Setup Symfony 4 with Docker in 5 minutes" width="480" height="320" border="0" /></a>
+  <img src="https://raw.githubusercontent.com/tulik/symfony-4-docker-runtime-env/master/documentation/images/schema.png">
 </p>
 
-## How to start
+# Quick start
 
 ```
 $ git clone https://github.com/tulik/symfony-4-docker-runtime-env.git
 $ cd symfony-4-docker-runtime-env
 $ docker-compose up
 ```
+Wait for containers to start, then to [http://localhost](http://localhost)
 
-## Executing command inside of Docker container
+## Video tuturial
+<p align="center">
+	<a href="http://www.youtube.com/watch?feature=player_embedded&v=NIEKB5iRcOs
+	" target="_blank"><img src="http://img.youtube.com/vi/NIEKB5iRcOs/0.jpg" 
+	alt="Setup Symfony 4 with Docker in 5 minutes" width="480" height="320" border="0" /></a>
+</p>
 
+
+# Directory structure
 ```
-$ docker-compose exec php bin/console doctrine:schema:update --force
+symfony-4-docker-runtime-env
+├── documentation
+│   └── images
+├── h2-proxy
+│   └── conf.d
+├── helm
+│   └── symfony
+│       ├── charts
+│       └── templates
+└── symfony
+    ├── bin
+    ├── config
+    │   ├── packages
+    │   │   ├── dev
+    │   │   ├── prod
+    │   │   └── test
+    │   └── routes
+    ├── docker
+    │   ├── nginx
+    │   │   └── conf.d
+    │   ├── php
+    │   └── varnish
+    │       └── conf
+    ├── public
+    └── src
+        ├── Controller
+        ├── Entity
+        ├── Migrations
+        └── Repository
 ```
-
-or
-
-```
-$ docker-compose exec php composer req profiler
-
-```
-
-## &nbsp;
-
-**Copyright Note:** Substantial portions of the solution was introduced by [Kévin Dunglas](https://github.com/dunglas).
+<small>
+<hr />
+**Copyright Note:** Part of the solution was introduced by Kévin Dunglas.
+<small>

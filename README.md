@@ -1,21 +1,24 @@
 # Symfony 4 Docker
 ## Minimal Runtime Environment [![Build Status](https://travis-ci.org/tulik/symfony-4-docker-runtime-env.svg?branch=master)](https://travis-ci.org/tulik/symfony-4-docker-runtime-env)  [![symfony 4 docker](https://img.shields.io/badge/dev-symfony%204-F7CA18.svg?style=flat)](https://github.com/tulik/symfony-4-docker-runtime-env)
 
+
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/tulik/symfony-4-docker-runtime-env/master/documentation/images/logo.png">
 </p>
 
 
+## See it working! 
+**[Deployed with Travis and Kubernetes](https://symfony-4-docker-runtime-env.tulik.info/)**
+ - Further documentation about deployment will be provied.
+
 # Table of content
-- [See it working! [Deployed with Travis and Kubernetes](https://symfony-4-docker-runtime-env.tulik.info/)](#see-it-working-deployed-with-travis-and-kuberneteshttpssymfony-4-docker-runtime-envtulikinfo)
+- [See it working! Deployed with Travis and Kubernetes](#see-it-working)
 - [Table of content](#table-of-content)
 - [Environment architecture](#environment-architecture)
 - [Quick start](#quick-start)
 - [Video tuturial](#video-tuturial)
 - [Directory structure](#directory-structure)
-
-## See it working! [Deployed with Travis and Kubernetes](https://symfony-4-docker-runtime-env.tulik.info/)
-Further documentation about deployment will be provied.
 
 # Environment architecture
 
@@ -72,7 +75,9 @@ symfony-4-docker-runtime-env
         ├── Migrations
         └── Repository
 ```
-<sub>
+
+<sub><sub>
 <hr noshade color="#FFFFFF" width="100%" size="1" style="padding:0; margin:8px 0 8px 0; border:none; width:100%; height: 1px; color:#FFFFFF; background-color: #FFFFFF" />
-<strong>copyright Note:</strong> Part of the solution was introduced by Kévin Dunglas.
-<sub>
+
+**Copyright Note:** Substantial portions of the solution was introduced by Kévin Dunglas.
+</sub></sub>

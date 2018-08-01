@@ -74,5 +74,5 @@ symfony-4-docker-runtime-env
 ```
 <sub>
 <hr noshade color="#FFFFFF" width="100%" size="1" style="padding:0; margin:8px 0 8px 0; border:none; width:100%; height: 1px; color:#FFFFFF; background-color: #FFFFFF" />
-**Copyright Note:** Part of the solution was introduced by Kévin Dunglas.
+<strong>opyright Note:</strong> Part of the solution was introduced by Kévin Dunglas.
 <sub>

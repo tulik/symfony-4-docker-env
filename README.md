@@ -7,11 +7,6 @@
   <img src="https://raw.githubusercontent.com/tulik/symfony-4-docker-runtime-env/master/documentation/images/logo.png">
 </p>
 
-
-## See it working! 
-**[Deployed with Travis and Kubernetes](https://symfony-4-docker-runtime-env.tulik.info/)**
- - Further documentation about deployment will be provied.
-
 # Table of content
 - [See it working! Deployed with Travis and Kubernetes](#see-it-working)
 - [Table of content](#table-of-content)
@@ -20,6 +15,10 @@
 - [Video tuturial](#video-tuturial)
 - [Directory structure](#directory-structure)
 
+## See it working! 
+**[Deployed with Travis and Kubernetes](https://symfony-4-docker-runtime-env.tulik.info/)**
+ - Further documentation about deployment will be provied.
+ 
 # Environment architecture
 
 <p align="center">

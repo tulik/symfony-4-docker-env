@@ -45,7 +45,7 @@ services:
 
     postgres:
         # In production, you may want to use a managed database service
-        image: postgres
+        image: postgres:9.6-alpine
         container_name: postgres
         environment:
             - POSTGRES_DB=symfony

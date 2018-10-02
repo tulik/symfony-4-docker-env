@@ -1,6 +1,0 @@
-App\Entity\Review:
-  review-{1..2000}:
-    body: "<paragraph()>"
-    rating: "<numberBetween(1,5)>"
-    author: "@user-*"
-    publicationDate: "<dateTimeBetween('-90 days', 'now')>"

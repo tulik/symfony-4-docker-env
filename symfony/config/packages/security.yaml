@@ -1,0 +1,36 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        webservice:
+            id: App\Service\Security\UserProvider
+
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        login:
+            pattern:  ^/login
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path:               /login_check
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern:   ^/(!^/)
+            stateless: true
+            guard:
+                authenticators:
+                - lexik_jwt_authentication.jwt_token_authenticator
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+    - { path: ^/login,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/(?!^/), roles: IS_AUTHENTICATED_FULLY }

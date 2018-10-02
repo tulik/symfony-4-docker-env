@@ -1,0 +1,12 @@
+App\Entity\User:
+  user-1:
+    fullName: developer
+    username: developer@symfony.com
+    email: developer@symfony.com
+    plainPassword: developer
+
+  user-{2..100}:
+    fullName: <name()>
+    username: <email()>
+    email: <email()>
+    plainPassword: <( substr( md5( uniqid( rand(), true ) ) , 0, 8) )>

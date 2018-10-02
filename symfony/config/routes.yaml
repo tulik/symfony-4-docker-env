@@ -1,3 +1,7 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+app.swagger_ui:
+    path: /documentation
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+api.login_check:
+    path: /login_check

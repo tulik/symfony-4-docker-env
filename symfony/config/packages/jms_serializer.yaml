@@ -1,0 +1,14 @@
+# JSM Serializer Configuration
+jms_serializer:
+    property_naming:
+        id: 'jms_serializer.identical_property_naming_strategy'
+
+#    metadata:
+#        auto_detection: false
+#        directories:
+#            any-name:
+#                namespace_prefix: "My\\FooBundle"
+#                path: "@MyFooBundle/Resources/config/serializer"
+#            another-name:
+#                namespace_prefix: "My\\BarBundle"
+#                path: "@MyBarBundle/Resources/config/serializer"

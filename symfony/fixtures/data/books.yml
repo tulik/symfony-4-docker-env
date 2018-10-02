@@ -1,0 +1,8 @@
+App\Entity\Book:
+  book-{1..1000}:
+    isbn: "<numberBetween(111111111, 999999999)>"
+    title: "<word(3)>"
+    reviews: ["@review-*"]
+    description: "<paragraph(1)>"
+    author: "@user-*"
+    publicationDate: "<dateTimeBetween('-90 days', 'now')>"

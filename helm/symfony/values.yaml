@@ -19,6 +19,15 @@ nginx:
   pullPolicy: Always
   replicaCount: 1
 
+blackfire:
+  image: blackfire/blackfire
+  container_name: blackfire
+  depends_on:
+  environment:
+    SERVER_ID: ${BLACKFIRE_SERVER_ID}
+    BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+    BLACKFIRE_LOG_LEVEL: 4
+
 
 ingress:
   annotations:

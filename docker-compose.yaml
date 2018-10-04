@@ -83,6 +83,18 @@ services:
         ports:
         - 2000:8080
 
+    blackfire:
+        image: blackfire/blackfire
+        container_name: blackfire
+        depends_on:
+        - php
+        environment:
+            BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
+            BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+            BLACKFIRE_LOG_LEVEL: 4
+        ports:
+        - "8707:8707"
+
     h2-proxy:
         # Don't use this proxy in prod
         build:

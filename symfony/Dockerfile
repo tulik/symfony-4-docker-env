@@ -1,25 +1,31 @@
 FROM composer:1.6
-FROM php:7.2-fpm-alpine3.7
+FROM php:7.2-fpm-alpine3.8
 
 RUN apk add --no-cache \
 		git
 
 ENV APCU_VERSION 5.1.11
 ENV XDEBUG_VERSION 2.6.0
+ENV YAML_VERSION 2.0.2
 
 RUN set -xe \
 	&& apk add --no-cache --virtual .build-deps \
 		$PHPIZE_DEPS \
 		icu-dev \
 		postgresql-dev \
+		mysql-dev \
 		zlib-dev \
+		libzip-dev \
+		yaml-dev \
 	&& docker-php-ext-install \
 		intl \
 		pdo_pgsql \
+		pdo_mysql \
 		zip \
 	&& pecl install \
 		apcu-${APCU_VERSION} \
 		xdebug-${XDEBUG_VERSION} \
+	    yaml-${YAML-VERSION} \
 	&& docker-php-ext-enable --ini-name 20-apcu.ini apcu \
 	&& docker-php-ext-enable --ini-name 05-opcache.ini opcache \
 	&& docker-php-ext-enable --ini-name xdebug.ini xdebug \

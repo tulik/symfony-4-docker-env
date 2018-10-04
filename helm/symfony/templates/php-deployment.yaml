@@ -37,11 +37,6 @@ spec:
                 configMapKeyRef:
                   name: {{ template "fullname" . }}
                   key: cors-allow-origin
-            - name: VARNISH_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: varnish-url
             - name: APP_SECRET
               valueFrom:
                 secretKeyRef:

@@ -25,7 +25,7 @@ spec:
           image: "{{ .Values.blackfire.repository }}:{{ .Values.blackfire.tag }}"
           imagePullPolicy: {{ .Values.blackfire.pullPolicy }}
           ports:
-            - containerPort: 80
+            - containerPort: 8707
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}

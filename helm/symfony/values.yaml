@@ -20,9 +20,8 @@ nginx:
   replicaCount: 1
 
 blackfire:
-  image: blackfire/blackfire
-  container_name: blackfire
-  depends_on:
+  repository: blackfire/blackfire
+  tag: latest
   environment:
     SERVER_ID: ${BLACKFIRE_SERVER_ID}
     BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}

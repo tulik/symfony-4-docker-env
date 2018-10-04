@@ -8,7 +8,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
-  SERVER_ID: {{ .Values.blackfire.environment.SERVER_ID }}
+  BLACKFIRE_SERVER_ID: {{ .Values.blackfire.environment.BLACKFIRE_SERVER_ID }}
   BLACKFIRE_SERVER_TOKEN: {{ .Values.blackfire.environment.BLACKFIRE_SERVER_TOKEN }}
   BLACKFIRE_LOG_LEVEL: {{ .Values.blackfire.environment.BLACKFIRE_LOG_LEVEL }}
 

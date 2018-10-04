@@ -6,13 +6,13 @@ services:
             context: ./symfony
         container_name: php
         depends_on:
-            - postgres
+        - postgres
         env_file:
-            - ./symfony/.env
+        - ./symfony/.env
         # Comment out these volumes in production
         volumes:
-            - ./symfony:/srv/symfony:rw,cached
-            # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+        - ./symfony:/srv/symfony:rw,cached
+        # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
         environment:
             # If you develop on Windows change this to remote_host=docker.for.win.localhost
             # If you develop on Linux change this to remote_host=172.17.0.1
@@ -24,11 +24,11 @@ services:
             dockerfile: Dockerfile.nginx
         container_name: symfony
         depends_on:
-            - php
+        - php
         ports:
-            - "8080:80"
+        - "8080:80"
         volumes:
-            - ./symfony/public:/srv/symfony/public:ro
+        - ./symfony/public:/srv/symfony/public:ro
 
     cache-proxy:
         build:
@@ -36,37 +36,52 @@ services:
             dockerfile: ./Dockerfile.varnish
         container_name: cache-proxy
         depends_on:
-            - symfony
+        - symfony
         # Comment out this volume in production
         volumes:
-            - ./symfony/docker/varnish/conf:/etc/varnish:ro
+        - ./symfony/docker/varnish/conf:/etc/varnish:ro
         ports:
-            - "8081:80"
+        - "8081:80"
 
     postgres:
         # In production, you may want to use a managed database service
         image: postgres:9.6-alpine
         container_name: postgres
         environment:
-            - POSTGRES_DB=symfony
-            - POSTGRES_USER=symfony
-            - POSTGRES_PASSWORD=symfony
+        - POSTGRES_DB=symfony
+        - POSTGRES_USER=symfony
+        - POSTGRES_PASSWORD=symfony
+        - PGDATA=/var/lib/postgresql/data/db-files/
         volumes:
-            - db-data:/var/lib/postgresql/data:rw
-            # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-            # - ./docker/db/data:/var/lib/postgresql/data:rw
+        - db-data:/var/lib/postgresql/data:rw
+        # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+        # - ./docker/db/data:/var/lib/postgresql/data:rw
         ports:
-            - "5432:5432"
+        - "5432:5432"
+
+# Optional mysql database - uncomment and replace "depends_on: [ postgres ] with mysql
+#   mysql:
+#      # In production, you may want to use a managed database service
+#      image: mysql:5.7
+#      container_name: mysql
+#      environment:
+#          MYSQL_ROOT_PASSWORD: root
+#          MYSQL_USER: symfony
+#          MYSQL_PASSWORD: symfony
+#      command: --log-bin=/var/lib/mysql/mysql-bin.log --binlog-format=ROW --server-id=1 --init-file /var/mysql/data/init.sql
+#      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+#      volumes:
+#      - ./symfony/docker/mysql:/var/mysql/data:ro
+#      - db-data:/var/lib/mysql:rw
 
     adminer:
-      image: adminer
-      container_name: adminer
-      depends_on:
-          - postgres
-      restart: always
-      ports:
+        image: adminer
+        container_name: adminer
+        depends_on:
+        - postgres
+        restart: always
+        ports:
         - 2000:8080
-
 
     h2-proxy:
         # Don't use this proxy in prod
@@ -75,12 +90,12 @@ services:
             dockerfile: ./Dockerfile
         container_name: h2-proxy
         depends_on:
-            - symfony
-            - cache-proxy
+        - symfony
+        - cache-proxy
         ports:
-            - "80:80"
-            - "443:443"
-            - "8443:8443"
+        - "80:80"
+        - "443:443"
+        - "8443:8443"
 
 volumes:
     db-data: {}

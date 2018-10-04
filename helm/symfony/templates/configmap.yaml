@@ -11,4 +11,3 @@ data:
   env: {{ .Values.env | quote }}
   debug: {{ .Values.debug | quote }}
   cors-allow-origin: {{ .Values.corsAllowOrigin | quote }}
-  varnish-url: {{ if .Values.varnish.enabled }}http://varnish{{ else }}{{ .Values.varnish.url | quote }}{{ end }}

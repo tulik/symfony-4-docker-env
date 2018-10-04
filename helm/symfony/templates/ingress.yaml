@@ -18,7 +18,7 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: {{ if .Values.varnish.enabled }}varnish{{ else }}symfony{{ end }}
+          serviceName: symfony
           servicePort: 80
   {{- if .Values.ingress.tls }}
   tls:

@@ -19,13 +19,6 @@ nginx:
   pullPolicy: Always
   replicaCount: 1
 
-varnish:
-  enabled: true
-  #url: https://example.com
-  repository: gcr.io/personal-dev-environment/varnish
-  tag: latest
-  pullPolicy: Always
-  replicaCount: 1
 
 ingress:
   annotations:

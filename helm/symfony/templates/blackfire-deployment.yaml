@@ -7,10 +7,6 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-data:
-  BLACKFIRE_SERVER_ID: {{ .Values.blackfire.environment.BLACKFIRE_SERVER_ID }}
-  BLACKFIRE_SERVER_TOKEN: {{ .Values.blackfire.environment.BLACKFIRE_SERVER_TOKEN }}
-  BLACKFIRE_LOG_LEVEL: {{ .Values.blackfire.environment.BLACKFIRE_LOG_LEVEL }}
 
 spec:
   replicas: {{ .Values.blackfire.replicaCount }}
@@ -23,6 +19,13 @@ spec:
       containers:
         - name: {{ .Chart.Name }}-blackfire
           image: "{{ .Values.blackfire.repository }}:{{ .Values.blackfire.tag }}"
+          env:
+          - name: BLACKFIRE_SERVER_ID
+            value: {{ .Values.blackfire.environment.BLACKFIRE_SERVER_ID }}
+          - name: BLACKFIRE_SERVER_TOKEN
+            value: {{ .Values.blackfire.environment.BLACKFIRE_SERVER_TOKEN }}
+          - name: BLACKFIRE_LOG_LEVEL
+            value: {{ .Values.blackfire.environment.BLACKFIRE_LOG_LEVEL }}
           imagePullPolicy: {{ .Values.blackfire.pullPolicy }}
           ports:
             - containerPort: 8707

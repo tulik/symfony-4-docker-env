@@ -19,6 +19,12 @@ nginx:
   pullPolicy: Always
   replicaCount: 1
 
+blackfire:
+  repository: blackfire/blackfire
+  tag: latest
+  blackfire_server_id: 0ee01eff-ef1e-4874-9fb5-42e9fed8c66d
+  blackfire_server_token: c777e5620cbb9045b8c8072371f9350ee15930fc5d3c412f540f09ff6b072cea
+
 
 ingress:
   annotations:

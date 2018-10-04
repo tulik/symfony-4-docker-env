@@ -23,8 +23,8 @@ blackfire:
   repository: blackfire/blackfire
   tag: latest
   environment:
-    BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
-    BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+    BLACKFIRE_SERVER_ID: 0ee01eff-ef1e-4874-9fb5-42e9fed8c66d
+    BLACKFIRE_SERVER_TOKEN: c777e5620cbb9045b8c8072371f9350ee15930fc5d3c412f540f09ff6b072cea
     BLACKFIRE_LOG_LEVEL: 4
 
 

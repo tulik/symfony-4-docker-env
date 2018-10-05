@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: blackfire
   labels:
-    app: {{ template "name" . }}-nginx
+    app: {{ template "name" . }}-blackfire
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -14,5 +14,5 @@ spec:
       targetPort: 8707
       protocol: TCP
   selector:
-    app: {{ template "name" . }}-nginx
+    app: {{ template "name" . }}-blackfire
     release: {{ .Release.Name }}

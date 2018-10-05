@@ -11,7 +11,7 @@
 - [See it working! Deployed with Travis and Kubernetes](#see-it-working)
 - [Environment architecture](#environment-architecture)
 - [Quick start](#quick-start)
-- [Video tuturial](#video-tuturial)
+- [Blackfire profiler](#blackfire-profiler)
 - [Directory structure](#directory-structure)
 
 ## See it working! 
@@ -35,18 +35,19 @@ $ docker-compose up
 ```
 Wait for containers to start, then to [http://localhost](http://localhost)
 
-## Video tuturial
-<p align="center">
-	<a href="http://www.youtube.com/watch?feature=player_embedded&v=NIEKB5iRcOs
-	" target="_blank"><img src="http://img.youtube.com/vi/NIEKB5iRcOs/0.jpg" 
-	alt="Setup Symfony 4 with Docker in 5 minutes" width="480" height="320" border="0" /></a>
-</p>
+![Blackfire.io](https://raw.githubusercontent.com/tulik/symfony-4-docker-runtime-env/master/documentation/images/demo.gif)
 
-## Blackfire profiler
+
+
+
+# Blackfire profiler
 **[Blackfire.io](https://blackfire.io)** is continuous PHP Performance Testing. 
+
+![Blackfire.io](https://raw.githubusercontent.com/tulik/symfony-4-docker-runtime-env/master/documentation/images/blackfire-production-demo.gif)
 
 Register your trial, be able to profile both in development and with a paid subscription in production too!
 Don't forget to get your **[Blackfire Companion](https://blackfire.io/docs/integrations/chrome)**.
+
 
 [See call graph](https://blackfire.io/profiles/54e07b00-ead8-4d3b-a471-9334b3d28354/graph)
 

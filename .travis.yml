@@ -45,5 +45,6 @@ script:
   - gcloud docker -- push gcr.io/$GCLOUD_PROJECT/php
   - gcloud docker -- push gcr.io/$GCLOUD_PROJECT/nginx
   - gcloud docker -- push gcr.io/$GCLOUD_PROJECT/varnish
-  - linux-amd64/helm del --purge symfony-4-docker-runtime-env
+ # It does versioning now
+ # - linux-amd64/helm del --purge symfony-4-docker-runtime-env
   - linux-amd64/helm install helm/symfony --namespace symfony --name symfony-4-docker-runtime-env

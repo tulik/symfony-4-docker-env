@@ -1,5 +1,5 @@
 controllers:
   resource: '../src/Controller/'
   type:     annotation
-  prefix:   /site
+  prefix:   /
   trailing_slash_on_root: false

@@ -1,5 +1,3 @@
-controllers:
-  resource: '../src/Controller/'
-  type:     annotation
-  prefix:   /
-  trailing_slash_on_root: false
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index

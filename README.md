@@ -47,7 +47,7 @@ For a better integration of Docker to PHPStorm, use the [documentation](https://
 
 2. If needed add a server for PHP as explained @see [Add a debug server section](https://github.com/woprrr/symfony-4-skeleton-docker/blob/master/doc/phpstorm-macosx.md#add-a-debug-server).
 
-<small>Thank to [@woprrr](https://github.com/woprrr) for contribution on Xdebug.</small> 
+<sup>Thank to [@woprrr](https://github.com/woprrr) for contribution on Xdebug.</sup> 
 
 # Blackfire profiler
 **[Blackfire.io](https://blackfire.io)** is continuous PHP Performance Testing. 
@@ -58,7 +58,7 @@ Register your trial, be able to profile both in development and with a paid subs
 Don't forget to get your **[Blackfire Companion](https://blackfire.io/docs/integrations/chrome)**.
 
 
-###See balckfire.io [Call Graph Here](https://blackfire.io/profiles/54e07b00-ead8-4d3b-a471-9334b3d28354/graph).
+### See balckfire.io [Call Graph Here](https://blackfire.io/profiles/54e07b00-ead8-4d3b-a471-9334b3d28354/graph).
 
 # Directory structure
 ```
@@ -95,4 +95,4 @@ symfony-4-docker-runtime-env
 <sub><sub>
 <hr noshade color="#FFFFFF" width="100%" size="1" style="padding:0; margin:8px 0 8px 0; border:none; width:100%; height: 1px; color:#FFFFFF; background-color: #FFFFFF" />
 
-<small>**Copyright Note:** Substantial portions of the solution was introduced by Kévin Dunglas.</small>
+<sup>**Copyright Note:** Substantial portions of the solution was introduced by Kévin Dunglas.</sup>

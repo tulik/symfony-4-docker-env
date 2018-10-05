@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "name" . }}-blackfire
+  labels:
+    app: {{ template "name" . }}-blackfire
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+
+spec:
+  replicas: {{ .Values.blackfire.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "name" . }}-blackfire
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-blackfire
+          image: "{{ .Values.blackfire.repository }}:{{ .Values.blackfire.tag }}"
+          env:
+          - name: BLACKFIRE_SERVER_ID
+            value: {{ .Values.blackfire.environment.BLACKFIRE_SERVER_ID }}
+          - name: BLACKFIRE_SERVER_TOKEN
+            value: {{ .Values.blackfire.environment.BLACKFIRE_SERVER_TOKEN }}
+          - name: BLACKFIRE_LOG_LEVEL
+            value: {{ .Values.blackfire.environment.BLACKFIRE_LOG_LEVEL }}
+          imagePullPolicy: {{ .Values.blackfire.pullPolicy }}
+          ports:
+            - containerPort: 8707
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}

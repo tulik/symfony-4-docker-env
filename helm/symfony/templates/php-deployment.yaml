@@ -47,9 +47,9 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: database-url
-            - name: BLACKFIRE_SERVER_ID
+            - name: BLACKFIRE_CLIENT_ID
               value: {{ .Values.php.blackfire_client_id }}
-            - name: BLACKFIRE_SERVER_TOKEN
+            - name: BLACKFIRE_CLIENT_TOKEN
               value: {{ .Values.php.blackfire_client_token }}
 
           resources:

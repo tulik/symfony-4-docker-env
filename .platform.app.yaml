@@ -23,13 +23,15 @@ hooks:
     composer install
     bin/console assets:install --no-debug
     bin/console cache:clear
+    composer dumpautoload -o
   deploy: |
     set -e
     cd symfony
     composer install
     bin/console assets:install --symlink --relative public
     bin/console cache:clear
-# The relationships of the application with services or other applications.
+    composer dumpautoload -o
+  # The relationships of the application with services or other applications.
 # The left-hand side is the name of the relationship as it will be exposed
 # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
 # side is in the form `<service name>:<endpoint name>`.
@@ -41,14 +43,14 @@ disk: 2048
 
 # The mounts that will be performed when the package is deployed.
 mounts:
-  "/var/cache": "shared:files/cache"
-  "/var/log": "shared:files/log"
-  "/var/sessions": "shared:files/sessions"
+  "/symfony/var/cache": "shared:files/cache"
+  "/symfony/var/log": "shared:files/log"
+  "/symfony/var/sessions": "shared:files/sessions"
 
 # The configuration of app when it is exposed to the web.
 web:
   locations:
-    "./public":
+    "/symfony/public":
       # The public directory of the app, relative to its root.
       root: "public"
       # The front-controller script to send non-static requests to.

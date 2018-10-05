@@ -32,19 +32,6 @@ services:
         volumes:
         - ./symfony/public:/srv/symfony/public:ro
 
-    cache-proxy:
-        build:
-            context: ./symfony/
-            dockerfile: ./Dockerfile.varnish
-        container_name: cache-proxy
-        depends_on:
-        - symfony
-        # Comment out this volume in production
-        volumes:
-        - ./symfony/docker/varnish/conf:/etc/varnish:ro
-        ports:
-        - "8081:80"
-
     postgres:
         # In production, you may want to use a managed database service
         image: postgres:9.6-alpine
@@ -105,11 +92,9 @@ services:
         container_name: h2-proxy
         depends_on:
         - symfony
-        - cache-proxy
         ports:
         - "80:80"
         - "443:443"
-        - "8443:8443"
 
 volumes:
     db-data: {}

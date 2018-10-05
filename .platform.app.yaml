@@ -19,10 +19,12 @@ variables:
 hooks:
   build: |
     set -e
+    cd symfony
     bin/console assets:install --no-debug
     bin/console cache:clear
   deploy: |
     set -e
+    cd symfony
     bin/console assets:install --symlink --relative public
     bin/console cache:clear
 # The relationships of the application with services or other applications.
@@ -44,7 +46,7 @@ mounts:
 # The configuration of app when it is exposed to the web.
 web:
   locations:
-    "/symfony":
+    "./public":
       # The public directory of the app, relative to its root.
       root: "public"
       # The front-controller script to send non-static requests to.

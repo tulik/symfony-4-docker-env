@@ -8,11 +8,12 @@
 </p>
 
 # Table of content
-- [See it working! Deployed with Travis and Kubernetes](#see-it-working)
-- [Environment architecture](#environment-architecture)
-- [Quick start](#quick-start)
-- [Blackfire profiler](#blackfire-profiler)
-- [Directory structure](#directory-structure)
+1. [See it working! Deployed with Travis and Kubernetes](#see-it-working)
+2. [Environment architecture](#environment-architecture)
+3. [Quick start](#quick-start)
+4. [Configure Xdebug](#configure-xdebug)
+5. [Blackfire profiler](#blackfire-profiler)
+6. [Directory structure](#directory-structure)
 
 ## See it working! 
 **[Deployed with Travis and Kubernetes](https://symfony-4-docker-runtime-env.tulik.info/)**
@@ -37,8 +38,16 @@ Wait for containers to start, then to [http://localhost](http://localhost)
 
 ![Blackfire.io](https://raw.githubusercontent.com/tulik/symfony-4-docker-runtime-env/master/documentation/images/demo.gif)
 
+# Configure Xdebug
+If you use another IDE than [PHPStorm](https://www.jetbrains.com/phpstorm/), go to the [remote debugging](https://xdebug.org/docs/remote) section of Xdebug documentation.
 
+For a better integration of Docker to PHPStorm, use the [documentation](https://github.com/woprrr/symfony-4-skeleton-docker/blob/master/doc/phpstorm-macosx.md).
 
+1. Edit docker-compose file `docker-compose.yml` edit/adjust the configuration as needed for `XDEBUG_CONFIG` AND `PHP_IDE_CONFIG` environment variables.
+
+2. If needed add a server for PHP as explained @see [Add a debug server section](https://github.com/woprrr/symfony-4-skeleton-docker/blob/master/doc/phpstorm-macosx.md#add-a-debug-server).
+
+<sup>Thank to [@woprrr](https://github.com/woprrr) for contribution on Xdebug.</sup> 
 
 # Blackfire profiler
 **[Blackfire.io](https://blackfire.io)** is continuous PHP Performance Testing. 
@@ -49,7 +58,7 @@ Register your trial, be able to profile both in development and with a paid subs
 Don't forget to get your **[Blackfire Companion](https://blackfire.io/docs/integrations/chrome)**.
 
 
-[See call graph](https://blackfire.io/profiles/54e07b00-ead8-4d3b-a471-9334b3d28354/graph)
+### See balckfire.io [Call Graph Here](https://blackfire.io/profiles/54e07b00-ead8-4d3b-a471-9334b3d28354/graph).
 
 # Directory structure
 ```
@@ -73,19 +82,17 @@ symfony-4-docker-runtime-env
     ├── docker
     │   ├── nginx
     │   │   └── conf.d
-    │   ├── php
-    │   └── varnish
-    │       └── conf
+    │   └── php
     ├── public
     └── src
         ├── Controller
         ├── Entity
         ├── Migrations
         └── Repository
+        
 ```
 
 <sub><sub>
 <hr noshade color="#FFFFFF" width="100%" size="1" style="padding:0; margin:8px 0 8px 0; border:none; width:100%; height: 1px; color:#FFFFFF; background-color: #FFFFFF" />
 
-**Copyright Note:** Substantial portions of the solution was introduced by Kévin Dunglas.
-</sub></sub>
+<sup>**Copyright Note:** Substantial portions of the solution was introduced by Kévin Dunglas.</sup>

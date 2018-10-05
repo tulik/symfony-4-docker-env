@@ -49,3 +49,10 @@ web:
       root: "public"
       # The front-controller script to send non-static requests to.
       passthru: "/index.php"
+
+runtime:
+  extensions:
+  - name: "blackfire"
+    configuration:
+      server_id: ${BLACKFIRE_SERVER_ID}
+      server_token: ${BLACKFIRE_SERVER_TOKEN}

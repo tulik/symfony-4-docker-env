@@ -26,6 +26,7 @@ blackfire:
   blackfire_server_token: c777e5620cbb9045b8c8072371f9350ee15930fc5d3c412f540f09ff6b072cea
 
 
+
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx

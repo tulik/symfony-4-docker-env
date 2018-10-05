@@ -17,6 +17,8 @@ services:
             # If you develop on Windows change this to remote_host=docker.for.win.localhost
             # If you develop on Linux change this to remote_host=172.17.0.1
             XDEBUG_CONFIG: "remote_host=docker.for.mac.localhost idekey=IDE_XDEBUG"
+            BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
+            BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
 
     symfony:
         build:

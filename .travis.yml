@@ -43,4 +43,4 @@ script:
   - gcloud container clusters get-credentials cluster-1 --zone europe-west1-c --project $GCLOUD_PROJECT
   - gcloud docker -- push gcr.io/$GCLOUD_PROJECT/php
   - gcloud docker -- push gcr.io/$GCLOUD_PROJECT/nginx
-  - linux-amd64/helm upgrade helm/symfony --namespace symfony --name symfony-4-docker-runtime-env
+  - linux-amd64/helm upgrade helm/symfony --namespace symfony

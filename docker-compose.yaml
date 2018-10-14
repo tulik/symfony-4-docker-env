@@ -51,7 +51,7 @@ services:
 # Optional mysql database - uncomment and replace "depends_on: [ postgres ] with mysql
 #   mysql:
 #      # In production, you may want to use a managed database service
-#      image: mysql:5.7
+#      image: mariadb
 #      container_name: mysql
 #      environment:
 #          MYSQL_ROOT_PASSWORD: root

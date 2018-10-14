@@ -2,5 +2,5 @@
 
 We need to
 1. Write good documentation about deployment to Kubernetes
-2. **create Makefile**
+2. Create Makefile
 3. Setup Nginx caching and spin it with Symfony

@@ -1,5 +1,5 @@
 # Symfony 4 Docker
-## Minimal Runtime Environment [![Build Status](https://travis-ci.org/tulik/symfony-4-docker-runtime-env.svg?branch=master)](https://travis-ci.org/tulik/symfony-4-docker-runtime-env)  [![symfony 4 docker](https://img.shields.io/badge/dev-symfony%204-F7CA18.svg?style=flat)](https://github.com/tulik/symfony-4-docker-runtime-env) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tulik/symfony-4-docker-runtime-env/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tulik/symfony-4-docker-runtime-env/?branch=master) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/5335051b-cb89-44b0-9a2e-d455f623ab33/mini.png)](https://insight.sensiolabs.com/projects/5335051b-cb89-44b0-9a2e-d455f623ab33)
+## Minimal Runtime Environment [![Build Status](https://travis-ci.org/tulik/symfony-4-docker-runtime-env.svg?branch=master)](https://travis-ci.org/tulik/symfony-4-docker-runtime-env)  [![symfony 4 docker](https://img.shields.io/badge/dev-symfony%204-F7CA18.svg?style=flat)](https://symfony.com/4) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tulik/symfony-4-docker-runtime-env/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tulik/symfony-4-docker-runtime-env/?branch=master)
 
 
 

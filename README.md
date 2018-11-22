@@ -1,5 +1,5 @@
 # Symfony 4 Docker
-## Minimal Runtime Environment [![Build Status](https://travis-ci.org/tulik/symfony-4-docker-runtime-env.svg?branch=master)](https://travis-ci.org/tulik/symfony-4-docker-runtime-env)  [![symfony 4 docker](https://img.shields.io/badge/dev-symfony%204-F7CA18.svg?style=flat)](https://symfony.com/4) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tulik/symfony-4-docker-runtime-env/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tulik/symfony-4-docker-runtime-env/?branch=master)
+## Minimal Runtime Environment [![Build Status](https://travis-ci.org/tulik/symfony-4-docker-runtime-env.svg?branch=master)](https://travis-ci.org/tulik/symfony-docker)  [![symfony 4 docker](https://img.shields.io/badge/dev-symfony%204-F7CA18.svg?style=flat)](https://symfony.com/4) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tulik/symfony-4-docker-runtime-env/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tulik/symfony-docker?branch=master)
 
 
 
@@ -56,9 +56,6 @@ For a better integration of Docker to PHPStorm, use the [documentation](https://
 
 Register your trial, be able to profile both in development and with a paid subscription in production too!
 Don't forget to get your **[Blackfire Companion](https://blackfire.io/docs/integrations/chrome)**.
-
-
-### See balckfire.io [Call Graph Here](https://blackfire.io/profiles/54e07b00-ead8-4d3b-a471-9334b3d28354/graph).
 
 # Directory structure
 ```

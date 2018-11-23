@@ -1,1 +1,23 @@
 
+.gitignore
+CONTRIBUTING.md
+LICENSE
+README.md
+assets/
+bin/console
+bin/phpunit
+composer.json
+composer.lock
+config/
+package.json
+phpunit.xml.dist
+public/
+src/
+symfony.lock
+templates/
+tests/
+translations/
+var/
+vendor/
+webpack.config.js
+yarn.lock

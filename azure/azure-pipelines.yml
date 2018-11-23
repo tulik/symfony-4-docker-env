@@ -1,0 +1,73 @@
+# Starter pipeline
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+      - develop
+
+pr:
+  - master
+  - develop
+
+variables:
+  - group: rld-trading-ci
+  - name: acrLogin
+    value: 'docker login $(registryServerName) -u $(registryLogin) -p $(registryPassword) &> /dev/null;'
+  - name: envRun
+    value: 'docker-compose -f build/env/ci/docker-compose.yml -p trading-api up -d &> /dev/null;'
+  - name: depInstall
+    value: 'docker-compose -f build/env/ci/docker-compose.yml -p trading-api exec -T api sh -c "composer install --prefer-dist --no-ansi --optimize-autoloader --no-interaction --no-progress"'
+  - name: prepare
+    value: '$(acrLogin) $(envRun) $(depInstall)'
+  - name: execute
+    value: 'docker-compose -f build/env/ci/docker-compose.yml -p trading-api exec -T api sh -c'
+
+jobs:
+  - job: code_style
+    displayName: Code style
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - bash: |
+          $(prepare)
+        displayName: 'Prepare environment'
+      - bash: |
+          $(execute) "bin/phpcs --no-colors -q"
+        displayName: 'Code style'
+
+  - job:
+    displayName: PHPStan analysis
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - bash: |
+          $(prepare)
+        displayName: 'Prepare environment'
+      - bash: |
+          $(execute) "bin/phpstan analyse src --no-ansi --no-progress -c build/env/ci/conf/phpstan.neon"
+        displayName: 'PHPStan Analysis'
+
+  - job:
+    displayName: PHPUnit tests
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - bash: |
+          $(prepare)
+        displayName: 'Prepare environment'
+      - bash: |
+          $(execute) "bin/console doctrine:database:drop --no-ansi --force"
+          $(execute) "bin/console doctrine:database:create --no-ansi"
+          $(execute) "bin/console doctrine:migrations:migrate --no-ansi --no-interaction"
+        displayName: 'Migrate database schema'
+      - bash: |
+          $(execute) "bin/phpunit --log-junit TEST-phpunit-junit.xml"
+        displayName: 'PHPUnit tests'
+      - task: PublishTestResults@2
+        displayName: 'Publish results'
+        inputs:
+          testRunner: 'JUnit'
+          testResultsFiles: '**/TEST-phpunit-junit.xml'
+          searchFolder: '$(System.DefaultWorkingDirectory)'

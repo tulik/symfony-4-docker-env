@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Relendex" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <description>Relendex coding standard</description>
+
+    <!-- Show progress and colorize output -->
+    <arg name="basepath" value="."/>
+    <arg name="cache" value=".phpcs-cache"/>
+    <arg value="p"/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+
+    <file>src/</file>
+    <file>tests/</file>
+
+    <exclude-pattern>*/assets/*</exclude-pattern>
+    <exclude-pattern>*/public/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <rule ref="./vendor/escapestudios/symfony2-coding-standard/Symfony">
+        <!-- Blank line is not required between annotation groups -->
+        <exclude name="Symfony.Commenting.Annotations.Invalid"/>
+        <!-- License is not required -->
+        <exclude name="Symfony.Commenting.License.Warning"/>
+        <!-- Function comment is not required if the function is type-hinted -->
+        <exclude name="Symfony.Commenting.FunctionComment.MissingParamComment"/>
+        <exclude name="Symfony.Commenting.FunctionComment.MissingParamTag"/>
+        <exclude name="Symfony.Commenting.FunctionComment.Missing"/>
+        <exclude name="Symfony.Commenting.FunctionComment.MissingReturn"/>
+        <exclude name="Symfony.Commenting.ClassComment.Missing"/>
+        <!-- Single-line comments before functions are allowed -->
+        <exclude name="Symfony.Commenting.FunctionComment.WrongStyle"/>
+        <!-- Functions arguments don't have to be on a single line -->
+        <exclude name="Symfony.Functions.Arguments.Invalid"/>
+        <!-- Property names can contain numbers -->
+        <exclude name="Zend.NamingConventions.ValidVariableName.MemberVarContainsNumbers"/>
+    </rule>
+
+    <!-- Don't enforce public/protected/private order in entity classes -->
+    <rule ref="Symfony.Functions.ScopeOrder.Invalid">
+        <exclude-pattern>*/Model/*</exclude-pattern>
+    </rule>
+
+    <rule ref="Squiz.Strings.ConcatenationSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true" />
+        </properties>
+    </rule>
+
+    <!-- Rules casted to "warning" because the sniff is flaky-->
+
+    <rule ref="Symfony.Errors.ExceptionMessage.Invalid">
+        <type>warning</type>
+    </rule>
+    <rule ref="Symfony.Functions.ReturnType.Invalid">
+        <type>warning</type>
+    </rule>
+
+    <!-- Rules that don't apply to migrations -->
+    <rule ref="Symfony.Files.AlphanumericFilename.Invalid">
+        <exclude-pattern>/migrations/*</exclude-pattern>
+    </rule>
+    <rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
+        <exclude-pattern>/migrations/*</exclude-pattern>
+    </rule>
+
+    <!-- Rules that don't apply to tests -->
+    <rule ref="PSR1.Methods.CamelCapsMethodName">
+        <exclude-pattern>/tests/*</exclude-pattern>
+        <exclude-pattern>*/Tests/*</exclude-pattern>
+    </rule>
+
+
+</ruleset>

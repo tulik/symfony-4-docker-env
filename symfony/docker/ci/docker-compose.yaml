@@ -1,0 +1,77 @@
+version: '3.4'
+x-symfony-common:
+    &symfony-common-config
+      APP_ENV: 'dev'
+      APP_DEBUG: '1'
+      APP_SECRET: '!ChangeMe!'
+      DATABASE_URL: 'mysql://symfony:symfony@mysql:3306/symfony'
+
+x-mysql-common:
+    &mysql-common-config
+      MYSQL_DATABASE: symfony
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony
+      
+services:
+    php:
+        image: ${CONTAINER_REGISTRY_BASE}/php:ci
+        container_name: php.ci
+        build:
+            target: symfony_dev
+            cache_from: &php_cache_from
+                - ${CONTAINER_REGISTRY_BASE}/php:ci
+                - ${CONTAINER_REGISTRY_BASE}/nginx:ci
+            context: .
+        container_name: symfony
+        depends_on:
+            - mysql
+        # Comment out these volumes in production
+        volumes:
+            - ./symfony:/srv/symfony:rw,cached
+        # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+        environment:
+            << : *symfony-common-config
+            << : *mysql-common-config
+            << : *backfire-client-config
+            << : *xdebug-common-config
+
+    nginx:
+        image: ${CONTAINER_REGISTRY_BASE}/nginx:ci
+        container_name: symfony.dev
+        build:
+            target: nginx
+            cache_from: *php_cache_from
+        container_name: nginx
+        depends_on:
+            - php
+        ports:
+            - '8080:80'
+        volumes:
+            - ./symfony/public:/srv/symfony/public:ro
+
+    mysql:
+      container_name: mysql
+      image: mysql/mysql-server:5.7
+      command: ["--default-authentication-plugin=mysql_native_password"]
+      ports:
+        - '8036:3306'
+      volumes:
+        - ./var/mysql:/var/lib/mysql
+      environment:
+        << : *mysql-common-config
+
+    h2-proxy:
+        # Don't use this proxy in prod
+        image: ${CONTAINER_REGISTRY_BASE}/h2-proxy:ci
+        container_name: h2-proxy.ci
+        build:
+            context: h2-proxy
+            dockerfile: ../../h2-proxy/Dockerfile
+        container_name: h2-proxy
+        depends_on:
+          - symfony
+        ports:
+          - 80:80
+          - 443:443

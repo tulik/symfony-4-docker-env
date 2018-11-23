@@ -1,0 +1,14 @@
+includes:
+  - vendor/phpstan/phpstan-beberlei-assert/extension.neon
+  - vendor/phpstan/phpstan-doctrine/extension.neon
+  - vendor/phpstan/phpstan-doctrine/rules.neon
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+  - vendor/phpstan/phpstan-phpunit/rules.neon
+  - vendor/phpstan/phpstan-symfony/extension.neon
+
+parameters:
+  level: max
+  reportUnmatchedIgnoredErrors: false
+  symfony:
+    container_xml_path: '%rootDir%/../../../var/cache/dev/srcApp_KernelDevDebugContainer.xml'
+    constant_hassers: false

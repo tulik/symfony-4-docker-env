@@ -1,0 +1,120 @@
+version: '3.4'
+x-symfony-common:
+    &symfony-common-config
+      APP_ENV: 'dev'
+      APP_DEBUG: '1'
+      APP_SECRET: '!ChangeMe!'
+      DATABASE_URL: 'mysql://symfony:symfony@mysql:3306/symfony'
+
+x-db-common:
+    &db-common-config
+      MYSQL_DATABASE: symfony
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony
+
+x-blackfire-client:
+    &backfire-client-config
+      BLACKFIRE_CLIENT_ID: d29ef9e1-2f41-447c-aa5f-026f7970ead6
+      BLACKFIRE_CLIENT_TOKEN: 1647dc4db9324811036c523bd63873be751f0fef369557630cfb0788cf5770fa
+
+x-blackfire-server:
+      &backfire-server-config
+      BLACKFIRE_SERVER_ID: aee5ced3-d8ec-4ee9-804c-3299ea54ac66
+      BLACKFIRE_SERVER_TOKEN: e55262e597785a6c06903a82d2f6cb6fa3193ffdb6de17e2bdc83300a05c7d0a
+
+x-xdebug-common:
+    # If you develop on WINDOWS change this to remote_host=docker.for.win.localhost
+    # If you develop on LINUX change this to remote_host=172.17.0.1
+    # The `remote_host` below may optionally be replaced with `remote_connect_back`
+    &xdebug-common-config
+        XDEBUG_CONFIG: >-
+            remote_enable=1
+            remote_host=docker.for.mac.localhost
+            remote_connect_back=1
+            remote_port=9000
+            idekey=PHPSTORM
+        # For remote_host=docker.for.mac.localhost
+        # This should correspond to the server declared in PHPStorm `Preferences | Languages & Frameworks | PHP | Servers`
+        # Then PHPStorm will use the corresponding path mappings
+        PHP_IDE_CONFIG: serverName=symfony
+
+services:
+    php:
+        image: ${CONTAINER_REGISTRY_BASE}/php:dev
+        container_name: php.dev
+        build:
+            target: symfony_dev
+            cache_from: &php_cache_from
+                - ${CONTAINER_REGISTRY_BASE}/php:devv
+                - ${CONTAINER_REGISTRY_BASE}/nginx:dev
+            context: .
+        depends_on:
+          - mysql
+        # Comment out these volumes in production
+        volumes:
+            - ../..:/srv/app:rw,cached
+        # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+        environment:
+            << : *symfony-common-config
+            << : *db-common-config
+            << : *backfire-client-config
+            << : *xdebug-common-config
+
+    nginx:
+        image: ${CONTAINER_REGISTRY_BASE}/nginx:dev
+        container_name: symfony.dev
+        build:
+            target: nginx
+            cache_from: *php_cache_from
+            context: .
+        depends_on:
+            - php
+        ports:
+            - '8080:80'
+        volumes:
+            - ../../public:/srv/app/public:ro
+
+    mysql:
+      container_name: mysql.dev
+      image: mysql/mysql-server:5.7
+      command: ["--default-authentication-plugin=mysql_native_password"]
+      ports:
+        - '8036:3306'
+      volumes:
+        - ../../var/mysql:/var/lib/mysql
+      environment:
+        << : *db-common-config
+
+    adminer:
+        container_name: adminer.dev
+        image: adminer
+        depends_on:
+          - mysql
+        restart: always
+        ports:
+          - 2000:8080
+
+    blackfire:
+        image: blackfire/blackfire
+        container_name: blackfire.dev
+        depends_on:
+            - php
+        environment:
+          << : *backfire-server-config
+        ports:
+            - 8707:8707
+
+    h2-proxy:
+        # Don't use this proxy in prod
+        image: ${CONTAINER_REGISTRY_BASE}/h2-proxy:dev
+        container_name: h2-proxy.dev
+        build:
+            target: h2_proxy_dev
+            context: .
+        depends_on:
+          - nginx
+        ports:
+          - 80:80
+          - 443:443

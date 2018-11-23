@@ -1,8 +1,0 @@
-
-###> symfony/framework-bundle ###
-/public/bundles/
-/var/
-/vendor/
-composer.lock
-symfony.lock
-###< symfony/framework-bundle ###

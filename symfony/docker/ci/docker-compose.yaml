@@ -16,15 +16,8 @@ x-mysql-common:
       
 services:
     php:
-        image: ${CONTAINER_REGISTRY_BASE}/php:ci
+        image: symfony.azurecr.io/php:ci
         container_name: php.ci
-        build:
-            target: symfony_dev
-            cache_from: &php_cache_from
-                - ${CONTAINER_REGISTRY_BASE}/php:ci
-                - ${CONTAINER_REGISTRY_BASE}/nginx:ci
-            context: .
-        container_name: symfony
         depends_on:
             - mysql
         # Comment out these volumes in production
@@ -34,16 +27,10 @@ services:
         environment:
             << : *symfony-common-config
             << : *mysql-common-config
-            << : *backfire-client-config
-            << : *xdebug-common-config
 
     nginx:
-        image: ${CONTAINER_REGISTRY_BASE}/nginx:ci
-        container_name: symfony.dev
-        build:
-            target: nginx
-            cache_from: *php_cache_from
-        container_name: nginx
+        image: symfony.azurecr.io/nginx:ci
+        container_name: symfony.ci
         depends_on:
             - php
         ports:
@@ -52,7 +39,7 @@ services:
             - ./symfony/public:/srv/symfony/public:ro
 
     mysql:
-      container_name: mysql
+      container_name: mysql.ci
       image: mysql/mysql-server:5.7
       command: ["--default-authentication-plugin=mysql_native_password"]
       ports:
@@ -64,14 +51,10 @@ services:
 
     h2-proxy:
         # Don't use this proxy in prod
-        image: ${CONTAINER_REGISTRY_BASE}/h2-proxy:ci
+        image: symfony.azurecr.io/h2-proxy:ci
         container_name: h2-proxy.ci
-        build:
-            context: h2-proxy
-            dockerfile: ../../h2-proxy/Dockerfile
-        container_name: h2-proxy
         depends_on:
-          - symfony
+          - nginx
         ports:
           - 80:80
           - 443:443

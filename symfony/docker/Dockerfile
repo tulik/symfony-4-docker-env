@@ -9,6 +9,7 @@ FROM php:${PHP_VERSION}-fpm-alpine AS symfony_base
 
 # persistent / runtime deps
 RUN apk add --no-cache \
+        bash \
 		acl \
 		file \
 		gettext \

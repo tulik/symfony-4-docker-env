@@ -5,24 +5,21 @@ trigger:
   branches:
     include:
       - master
-      - develop
-
 pr:
   - master
-  - develop
 
 variables:
-  - group: rld-trading-ci
+  - group: symfony-docker
   - name: acrLogin
-    value: 'docker login $(registryServerName) -u $(registryLogin) -p $(registryPassword) &> /dev/null;'
+    value: 'docker login $(registryServerName) -u $(registryLogin) -p $(registryPassword);'
   - name: envRun
-    value: 'docker-compose -f build/env/ci/docker-compose.yml -p trading-api up -d &> /dev/null;'
+    value: 'docker-compose -f symfony/docker/ci/docker-compose.yaml -p symfony-docker up;'
   - name: depInstall
-    value: 'docker-compose -f build/env/ci/docker-compose.yml -p trading-api exec -T api sh -c "composer install --prefer-dist --no-ansi --optimize-autoloader --no-interaction --no-progress"'
+    value: 'docker-compose -f symfony/docker/ci/docker-compose.yaml -p symfony-docker exec -T php sh -c "composer install --prefer-dist --no-ansi --optimize-autoloader --no-interaction --no-progress";'
   - name: prepare
     value: '$(acrLogin) $(envRun) $(depInstall)'
   - name: execute
-    value: 'docker-compose -f build/env/ci/docker-compose.yml -p trading-api exec -T api sh -c'
+    value: 'docker-compose -f symfony/docker/ci/docker-compose.yaml -p symfony-docker exec -T php sh -c'
 
 jobs:
   - job: code_style
@@ -46,7 +43,7 @@ jobs:
           $(prepare)
         displayName: 'Prepare environment'
       - bash: |
-          $(execute) "bin/phpstan analyse src --no-ansi --no-progress -c build/env/ci/conf/phpstan.neon"
+          $(execute) "bin/phpstan analyse src --no-ansi --no-progress -c phpstan.neon"
         displayName: 'PHPStan Analysis'
 
   - job:
@@ -57,11 +54,6 @@ jobs:
       - bash: |
           $(prepare)
         displayName: 'Prepare environment'
-      - bash: |
-          $(execute) "bin/console doctrine:database:drop --no-ansi --force"
-          $(execute) "bin/console doctrine:database:create --no-ansi"
-          $(execute) "bin/console doctrine:migrations:migrate --no-ansi --no-interaction"
-        displayName: 'Migrate database schema'
       - bash: |
           $(execute) "bin/phpunit --log-junit TEST-phpunit-junit.xml"
         displayName: 'PHPUnit tests'

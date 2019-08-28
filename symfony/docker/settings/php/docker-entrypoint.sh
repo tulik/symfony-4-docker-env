@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-wait-for-it mysql:3306 -t 30
+wait-for-it mysqli:3306 -t 180
 chmod 0777 /tmp
 set -e
 

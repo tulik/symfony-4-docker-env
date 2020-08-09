@@ -1,5 +1,5 @@
-FROM composer:1.6
-FROM php:7.2-fpm-alpine3.8
+FROM composer:latest
+FROM php:7-fpm-alpine
 
 RUN apk add --no-cache \
 		git
@@ -23,9 +23,9 @@ RUN set -xe \
 		pdo_mysql \
 		zip \
 	&& pecl install \
-		apcu-${APCU_VERSION} \
-		xdebug-${XDEBUG_VERSION} \
-	    yaml-${YAML-VERSION} \
+		apcu \
+		xdebug \
+	    yaml \
 	&& docker-php-ext-enable --ini-name 20-apcu.ini apcu \
 	&& docker-php-ext-enable --ini-name 05-opcache.ini opcache \
 	&& docker-php-ext-enable --ini-name xdebug.ini xdebug \

@@ -34,7 +34,7 @@ services:
 
     postgres:
         # In production, you may want to use a managed database service
-        image: postgres:9.6-alpine
+        image: postgres:alpine
         container_name: postgres
         environment:
         - POSTGRES_DB=symfony
@@ -47,21 +47,6 @@ services:
         # - ./docker/db/data:/var/lib/postgresql/data:rw
         ports:
         - "5432:5432"
-
-# Optional mysql database - uncomment and replace "depends_on: [ postgres ] with mysql
-#   mysql:
-#      # In production, you may want to use a managed database service
-#      image: mariadb
-#      container_name: mysql
-#      environment:
-#          MYSQL_ROOT_PASSWORD: root
-#          MYSQL_USER: symfony
-#          MYSQL_PASSWORD: symfony
-#      command: --log-bin=/var/lib/mysql/mysql-bin.log --binlog-format=ROW --server-id=1 --init-file /var/mysql/data/init.sql
-#      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-#      volumes:
-#      - ./symfony/docker/mysql:/var/mysql/data:ro
-#      - db-data:/var/lib/mysql:rw
 
     adminer:
         image: adminer

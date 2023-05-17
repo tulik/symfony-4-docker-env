@@ -3,7 +3,7 @@
     "license": "MIT",
     "description": "A minimal Symfony project recommended to create bare bones applications",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "symfony/console": "4.4.*",
